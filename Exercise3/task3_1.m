@@ -5,7 +5,7 @@ u1 = zeros(800,1);
 u2 = zeros(800,1);
 
 for i= 1:800
-    if i%7 == 0
+    if rem(i,70) == 0
         u1(i) = 5;
     else
         u1(i) = 0;
@@ -25,4 +25,28 @@ C = [1, 0;0,0];
 P = struct('A',A, 'B',B, 'C',C);
 h0 = [0,1,1,1];
 x0 = [0, 0];
-[y, h, x] = euler_integrate_dcm(U, P, Phrf, x0, h0)
+[y, h1, h2, x] = euler_integrate_dcm(U, P, Phrf, x0, h0);
+
+figure(1)
+plot(u1)
+title('Input')
+hold on;
+plot(u2)
+legend('u1', 'u2')
+hold off;
+
+figure(2)
+plot(x(:,1))
+hold on;
+plot(x(:,2))
+title('Neural activity')
+legend('x1','x2')
+hold off;
+
+figure(3)
+plot(y(:,1))
+hold on;
+plot(y(:,2))
+title('BOLD signal')
+legend('yBold1','yBold2')
+hold off;

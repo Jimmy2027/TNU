@@ -1,4 +1,4 @@
-function y = compute_bold_signal(h,Phrf)
+function y = compute_bold_signal(h, Phrf)
 eps = 0.47;
 E0 = Phrf.E0;
 TE = 0.035;

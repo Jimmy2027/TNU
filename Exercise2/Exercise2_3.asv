@@ -1,0 +1,16 @@
+addpath('C:\Users\PC\Google Drive\ETH\Master\2 semester\Translational Neuromodelling\tapas\HGF')
+
+mu3_0 = 1;
+sigma3_0 = 1;
+k2 = 2.5; w2 = -4;
+w3 = -6;
+zeta = 5; % response parameter
+
+%BINARY INPUT FROM TAPAS
+f = fopen("example_binary_input.txt");
+data = textscan(f, '%d');
+fclose(f);
+input = cell2mat(data);
+
+%SIMULATE MODEL
+sim = tapas_simModel(input,'tapas_hgf_binary', [NaN NaN 1 NaN NaN 1 NaN NaN NaN  2.5 NaN -4 -6], 'tapas_unitsq_sgm', [zeta]); 

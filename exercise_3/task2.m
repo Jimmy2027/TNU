@@ -1,6 +1,21 @@
 clear all;
 close all;
 
+%If B = B1 = 0, the dynamics of the neural system are independent of the
+%modulatory input. Descriptively we see that x1 and x2 are periodic and
+%u2=1 has no influence on them.
+%If B = B2, the modulatory input influences the dynamics of the neural
+%state x2, linked with the previous state x1. Descriptively we see that if b>0, u2>0 has an positive impact on
+%x2 (x2 increases) and b<0, u2>0 has a negative impact on x2 (x2
+%decreases).
+%If B = B3, the modulatory input also influences the dynamics of the state
+%x2, linked with the previous state x2. Descriptively we see that if b<0,
+%u2>0 has a negative impact on x2 (x2 decreases). If b>0, the positive impact of 
+%u2>0 is changed by setting the diagonal terms of (A+u2B) to -0.5exp(aii+u2bii), for the sability of the system.
+%This explains the negative impact of b=1 and the reduced positive effect
+%of b=0.5.
+
+
 %% define which B-matrix is used
 index = 1;
 b_vector= linspace(-1,1,5);

@@ -2,7 +2,7 @@ clear all;
 close all;
 
 %% define which B-matrix is used
-index = 1;
+index = 3;
 b_vector= linspace(-1,1,5);
 
 for j = 1:5

@@ -1,0 +1,341 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>task3</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-15"><meta name="DC.source" content="task3.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">define parameters</a></li><li><a href="#3">define matrices</a></li><li><a href="#4">integrate</a></li><li><a href="#5">a)</a></li><li><a href="#7">b)</a></li></ul></div><pre class="codeinput">clear <span class="string">all</span>;
+close <span class="string">all</span>;
+</pre><h2 id="2">define parameters</h2><pre class="codeinput">k1= 80;
+k2= 50;
+f1= 50;
+f2 =50;
+af= 3000;
+ab= 1000;
+c= 1;
+mu= 0.05;
+sigma= 0.01;
+t = 0:0.001:0.2;
+</pre><h2 id="3">define matrices</h2><pre class="codeinput">A=[0,1,0,0;-k1^2,-f1,af,0;0,0,0,1;ab,0,-k2^2,-f2];
+C=[0;0;0;c];
+u = normpdf(t,mu,sigma);
+</pre><h2 id="4">integrate</h2><pre class="codeinput">x=EulerIntegration(A,C,u);
+</pre><h2 id="5">a)</h2><p><b>load true data</b></p><pre class="codeinput">load(<span class="string">'tn20_ex4.mat'</span>)
+x_from_file = x_condition_1;
+</pre><p><b>compare / verify</b></p><pre class="codeinput">figure;
+plot(t,x(1,:));
+hold <span class="string">on</span>;
+plot(t,x_from_file(1,:));
+legend(<span class="string">'computed x1'</span>,<span class="string">'real x1'</span>);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'x1'</span>);
+
+figure;
+plot(t,x(3,:));
+hold <span class="string">on</span>;
+plot(t,x_from_file(3,:));
+legend(<span class="string">'computed x3'</span>,<span class="string">'real x3'</span>);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'x3'</span>);
+
+<span class="comment">% *as one can see the results are exactly the same :)*</span>
+</pre><img vspace="5" hspace="5" src="task3_01.png" alt=""> <img vspace="5" hspace="5" src="task3_02.png" alt=""> <h2 id="7">b)</h2><p><b>look at data</b></p><pre class="codeinput">figure;
+plot(t,x_condition_1(:,:),<span class="string">'-'</span>);
+hold <span class="string">on</span>;
+plot(t,x_condition_2(:,:),<span class="string">'.'</span>);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'x'</span>);
+legend(<span class="string">'x1'</span>,<span class="string">'x2'</span>,<span class="string">'x3'</span>,<span class="string">'x4'</span>,<span class="string">'x1 changed'</span>,<span class="string">'x2 changed'</span>,<span class="string">'x3 changed'</span>,<span class="string">'x4 changed'</span>);
+</pre><img vspace="5" hspace="5" src="task3_03.png" alt=""> <p><b>grid search</b></p><pre class="codeinput">no_spacing = 1000;
+explained_variances = zeros(4,no_spacing);
+i = 1;
+searchspace = zeros(4,no_spacing);
+searchspace(1,:)= linspace(40,120,no_spacing);
+<span class="keyword">for</span> k1 = linspace(40,120,no_spacing)
+    A=[0,1,0,0;-k1^2,-f1,af,0;0,0,0,1;ab,0,-k2^2,-f2];
+    C=[0;0;0;c];
+    u = normpdf(t,mu,sigma);
+    x=EulerIntegration(A,C,u);
+    explained_variances(1,i) = 1- var(x_condition_2-x)/var(x_condition_2);
+    i = i+1;
+<span class="keyword">end</span>
+
+
+i =1;
+k1 =80;
+searchspace(2,:) =linspace(25,75,no_spacing);
+<span class="keyword">for</span> k2 = linspace(25,75,no_spacing)
+    A=[0,1,0,0;-k1^2,-f1,af,0;0,0,0,1;ab,0,-k2^2,-f2];
+    C=[0;0;0;c];
+    u = normpdf(t,mu,sigma);
+    x=EulerIntegration(A,C,u);
+    explained_variances(2,i) = 1- var(x_condition_2-x)/var(x_condition_2);
+    i = i+1;
+<span class="keyword">end</span>
+
+i=1;
+k2= 50;
+searchspace(3,:) =linspace(2800,3200,no_spacing);
+<span class="keyword">for</span> af = linspace(1500,4500,no_spacing)
+    A=[0,1,0,0;-k1^2,-f1,af,0;0,0,0,1;ab,0,-k2^2,-f2];
+    C=[0;0;0;c];
+    u = normpdf(t,mu,sigma);
+    x=EulerIntegration(A,C,u);
+    explained_variances(3,i) = 1- var(x_condition_2-x)/var(x_condition_2);
+    i = i+1;
+<span class="keyword">end</span>
+
+
+i=1;
+af= 3000;
+searchspace(4,:) =linspace(500,1500,no_spacing);
+<span class="keyword">for</span> ab = linspace(900,1100,no_spacing)
+    A=[0,1,0,0;-k1^2,-f1,af,0;0,0,0,1;ab,0,-k2^2,-f2];
+    C=[0;0;0;c];
+    u = normpdf(t,mu,sigma);
+    x=EulerIntegration(A,C,u);
+    explained_variances(4,i) = 1- var(x_condition_2-x)/var(x_condition_2);
+    i = i+1;
+<span class="keyword">end</span>
+
+ab = 1000;
+
+maximums = zeros(4,1);
+best_parameter = zeros(4,1);
+<span class="keyword">for</span> j = 1:1:4
+    [m,k] = max(explained_variances(j,:));
+    maximums(j) =m;
+    best_parameter(j) = searchspace(j,k);
+<span class="keyword">end</span>
+
+
+[max_all,i] = max(maximums');
+fprintf(<span class="string">'best model is model %i with best param = %i'</span>,i,best_parameter(i))
+</pre><pre class="codeoutput">best model is model 1 with best param = 9.997998e+01</pre><p><b>compute changed x with found parameter</b></p><pre class="codeinput">k1 = best_parameter(i);
+A=[0,1,0,0;-k1^2,-f1,af,0;0,0,0,1;ab,0,-k2^2,-f2];
+C=[0;0;0;c];
+u = normpdf(t,mu,sigma);
+x=EulerIntegration(A,C,u);
+</pre><p><b>show approximated model (k1 changed to approx. 100) compared to x_condition_2</b></p><pre class="codeinput">figure;
+plot(t,x(:,:),<span class="string">'-'</span>);
+hold <span class="string">on</span>;
+plot(t,x_condition_2(:,:),<span class="string">'.'</span>);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'x'</span>);
+legend(<span class="string">'x1'</span>,<span class="string">'x2'</span>,<span class="string">'x3'</span>,<span class="string">'x4'</span>,<span class="string">'x1 cond_2'</span>,<span class="string">'x2 cond_2'</span>,<span class="string">'x3 cond_2'</span>,<span class="string">'x4 cond_2'</span>);
+</pre><img vspace="5" hspace="5" src="task3_04.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+clear all;
+close all;
+%% define parameters
+k1= 80;
+k2= 50;
+f1= 50;
+f2 =50;
+af= 3000;
+ab= 1000;
+c= 1;
+mu= 0.05;
+sigma= 0.01;
+t = 0:0.001:0.2;
+
+%% define matrices 
+A=[0,1,0,0;-k1^2,-f1,af,0;0,0,0,1;ab,0,-k2^2,-f2];
+C=[0;0;0;c];
+u = normpdf(t,mu,sigma);
+
+%% integrate 
+x=EulerIntegration(A,C,u);
+
+
+%% a)
+% *load true data* 
+
+load('tn20_ex4.mat')
+x_from_file = x_condition_1;
+
+%%
+% *compare / verify* 
+figure;
+plot(t,x(1,:));
+hold on;
+plot(t,x_from_file(1,:));
+legend('computed x1','real x1');
+xlabel('t');
+ylabel('x1');
+
+figure;
+plot(t,x(3,:));
+hold on;
+plot(t,x_from_file(3,:));
+legend('computed x3','real x3');
+xlabel('t');
+ylabel('x3');
+
+% *as one can see the results are exactly the same :)*
+
+
+%% b)
+% *look at data* 
+
+figure;
+plot(t,x_condition_1(:,:),'-');
+hold on;
+plot(t,x_condition_2(:,:),'.');
+xlabel('t');
+ylabel('x');
+legend('x1','x2','x3','x4','x1 changed','x2 changed','x3 changed','x4 changed');
+
+%% 
+% *grid search* 
+
+no_spacing = 1000;
+explained_variances = zeros(4,no_spacing);
+i = 1;
+searchspace = zeros(4,no_spacing);
+searchspace(1,:)= linspace(40,120,no_spacing);
+for k1 = linspace(40,120,no_spacing)
+    A=[0,1,0,0;-k1^2,-f1,af,0;0,0,0,1;ab,0,-k2^2,-f2];
+    C=[0;0;0;c];
+    u = normpdf(t,mu,sigma);
+    x=EulerIntegration(A,C,u);
+    explained_variances(1,i) = 1- var(x_condition_2-x)/var(x_condition_2);
+    i = i+1;
+end
+
+
+i =1;
+k1 =80;
+searchspace(2,:) =linspace(25,75,no_spacing);
+for k2 = linspace(25,75,no_spacing)
+    A=[0,1,0,0;-k1^2,-f1,af,0;0,0,0,1;ab,0,-k2^2,-f2];
+    C=[0;0;0;c];
+    u = normpdf(t,mu,sigma);
+    x=EulerIntegration(A,C,u);
+    explained_variances(2,i) = 1- var(x_condition_2-x)/var(x_condition_2);
+    i = i+1;
+end
+
+i=1;
+k2= 50;
+searchspace(3,:) =linspace(2800,3200,no_spacing);
+for af = linspace(1500,4500,no_spacing)
+    A=[0,1,0,0;-k1^2,-f1,af,0;0,0,0,1;ab,0,-k2^2,-f2];
+    C=[0;0;0;c];
+    u = normpdf(t,mu,sigma);
+    x=EulerIntegration(A,C,u);
+    explained_variances(3,i) = 1- var(x_condition_2-x)/var(x_condition_2);
+    i = i+1;
+end
+
+
+i=1;
+af= 3000;
+searchspace(4,:) =linspace(500,1500,no_spacing);
+for ab = linspace(900,1100,no_spacing)
+    A=[0,1,0,0;-k1^2,-f1,af,0;0,0,0,1;ab,0,-k2^2,-f2];
+    C=[0;0;0;c];
+    u = normpdf(t,mu,sigma);
+    x=EulerIntegration(A,C,u);
+    explained_variances(4,i) = 1- var(x_condition_2-x)/var(x_condition_2);
+    i = i+1;
+end
+
+ab = 1000;
+
+maximums = zeros(4,1);
+best_parameter = zeros(4,1);
+for j = 1:1:4
+    [m,k] = max(explained_variances(j,:));
+    maximums(j) =m;
+    best_parameter(j) = searchspace(j,k);
+end
+
+
+[max_all,i] = max(maximums');
+fprintf('best model is model %i with best param = %i',i,best_parameter(i))
+
+%%
+% *compute changed x with found parameter* 
+
+k1 = best_parameter(i);
+A=[0,1,0,0;-k1^2,-f1,af,0;0,0,0,1;ab,0,-k2^2,-f2];
+C=[0;0;0;c];
+u = normpdf(t,mu,sigma);
+x=EulerIntegration(A,C,u);
+
+%%
+% *show approximated model (k1 changed to approx. 100) compared to x_condition_2*
+
+figure;
+plot(t,x(:,:),'-');
+hold on;
+plot(t,x_condition_2(:,:),'.');
+xlabel('t');
+ylabel('x');
+legend('x1','x2','x3','x4','x1 cond_2','x2 cond_2','x3 cond_2','x4 cond_2');
+
+##### SOURCE END #####
+--></body></html>

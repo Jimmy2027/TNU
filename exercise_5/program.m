@@ -1,7 +1,7 @@
 function [f_vec] = program(a0,b0,mu0,lambda0,mu_vec,obs,N,threshold,with_prior)
 
     diff = 1000;
-    y_= (1/N)*sum(obs);
+    y_= (1/N)* sum(obs);
     x = 0;
     y = 100;
  
@@ -24,6 +24,8 @@ function [f_vec] = program(a0,b0,mu0,lambda0,mu_vec,obs,N,threshold,with_prior)
     F_start = -a_start* log(b_start)+ gammaln(a_start)-gammaln(a0)+a0*log(b0)+0.5*log(lambda0)+log(sqrt(s_squ_start))-N/2*log(2*pi)+0.5;
     i =1;
     
+    %update parameters and calculate new free energy, stop if threshold is
+    %reached
     while diff >= threshold
         s_squ = 1/(a_start/b_start*(N+lambda0));
         m = (lambda0*mu0+N*y_)/(lambda0+N);
